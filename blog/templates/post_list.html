@@ -1,0 +1,43 @@
+{%extends 'base.html' %}
+{% if user.is_authenticated %}
+{%block postlist%}
+<div class="outer">
+  <div class="table">
+    <table class="table">
+      <thead>
+        <th><center>LockerID</center></th>
+        <th><center>Locker Name</center></th>
+        <th><center>City</center></th>
+        <th><center>State</center></th>
+        <th><center>Pincode</center></th>
+        <th><center>Prime Capacity</center></th>
+        <th><center>Standard Capacity</center></th>
+        <th><center>Update Locker</center></th>
+        <th><center>Delete Locker</center></th>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+          <tr>
+            <td><center><a href="{% url 'post_detail' pk=post.pk %}">{{ post.locker_id }}</a></center></td>
+            <td><center>{{ post.locker_name }}</center></td>
+            <td><center>{{ post.city }}</center></td>
+            <td><center>{{ post.state }}</center></td>
+            <td><center>{{ post.pincode }}</center></td>
+            <td><center>{{ post.prime_capacity }}</center></td>
+            <td><center>{{ post.standard_capacity}}</center></td>
+            <td><center><a class="btn btn-warning" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a></center></td>
+            <td><center>
+              <a href="{% url 'post_remove' pk=post.pk %}">
+								<button type="button" class="btn btn-warning">
+									<span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="bottom" title="Delete"></span>
+							  </button>
+							</a>
+            </center></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{%endblock%}
+{%endif%}

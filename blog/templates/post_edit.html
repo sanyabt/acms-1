@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{%block title%} Edit Locker {%endblock%}
+{% block content %}
+    <h3 class="outer">Edit locker {{form.locker_name.value}}:</h3>
+    <script type="text/javascript">
+    	function errorAlert(){
+    		var x = document.getElementById("a").value;
+    		if(x==0)
+    			alert("Please enter a higher prime percentage");
+    	}
+    	window.onload=errorAlert;
+    	function putValue(){
+    		var x = document.getElementById("id_Prime_percentage").value;
+    		document.getElementById("std").value=100-x;
+    	}
+    </script>
+	<form method="post" class="form-horizontal" action="" enctype="multipart/form-data">{% csrf_token %}
+		<input type="text" value="{{ a }}" id="a" hidden/>
+	    <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_locker_id">Locker id:</label></label>
+            <div class="col-sm-2"><input id="id_locker_id" name="locker_id" type="number" value="{{form.locker_id.value}}" required /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_locker_name">Locker name:</label></label>
+            <div class="col-sm-2"><input id="id_locker_name" maxlength="45" name="locker_name" type="text" value="{{form.locker_name.value}}" /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_city">City:</label></label>
+            <div class="col-sm-2"><input id="id_city" maxlength="45" name="city" type="text" value="{{form.city.value}}" /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_state">State:</label></label>
+            <div class="col-sm-2"><input id="id_state" maxlength="45" name="state" type="text" value="{{form.state.value}}" /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_pincode">Pincode:</label></label>
+            <div class="col-sm-2"><input id="id_pincode" maxlength="45" name="pincode" type="text" value="{{form.pincode.value}}" /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_prime_capacity">Prime capacity: {{form.prime_capacity.value}}</label></label>
+            <div class="col-sm-2"><label for="id_standard_capacity" style="padding-top:7px;">Standard capacity: {{form.standard_capacity.value}}</label></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"><label for="id_Prime_percentage">Prime percentage:</label></label>
+            <div class="col-sm-2"><input id="id_Prime_percentage" name="Prime_percentage" type="text" required /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2">Standard Percentage:</label>
+            <div class="col-sm-2"><input type="text" id="std" onfocus="putValue()" /></div><!--actual input area-->
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2-col-sm-3">
+                <span class="text-danger small"></span>
+            </div>
+            <label class="control-label col-sm-2"></label>
+            <div class="col-sm-2"><button type="submit" class="btn btn-warning">Submit</button></div><!--actual input area-->
+        </div>
+	</form>
+{% endblock %}

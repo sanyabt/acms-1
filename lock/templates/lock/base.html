@@ -1,0 +1,30 @@
+{% load staticfiles  %}
+{% load lock_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="{%static 'img/favicon.jpg' %}" type="image" sizes="16x16">
+  <title>Amazon</title>
+  <link rel="stylesheet" type="text/css" href ="{% static 'lock/bootstrap-3.2.0/css/bootstrap.min.css'%}" />
+  <link rel="stylesheet" type="text/css" href ="{% static 'lock/bootstrap-3.2.0/css/bootstrap-theme.min.css' %}" />
+  <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href ="{% static 'lock/index.css'%}" />
+  <link rel="stylesheet" type="text/css" href ="{% static 'lock/dashboard.css'%}" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="page-header">
+    <center><img id="logo" src="{%static 'img/amazon_logo1.png' %}" /></center>
+     <a href="{% url 'item' %}" class="home_button">
+        <span class="glyphicon glyphicon-home" data-toggle="tooltip" data-placement="bottom" title="Home"></span>
+    </a>
+  </div>
+  <center><img src="{%static 'img/order_header.gif' %}" /></center>
+  <br><br>
+  {% block main_content %}
+  {% endblock %}
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends 'lock/base.html' %}
+{% load staticfiles%}
+{% load lock_extras %}
+{% block main_content %}
+	<h1>Failed to place an order</h1>
+	<a href ="{% url 'item' %}"><button>Try placing order again</button></a>
+	{{quantity}}
+	{{name}}
+{% endblock %}

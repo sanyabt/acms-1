@@ -1,0 +1,27 @@
+{% extends 'lock/base.html' %}
+{% load staticfiles%}
+{% load lock_extras %}
+{% block main_content %}
+<div class="container">
+<h3>Successfully placed your order at:</h3>
+</div>
+<div class="container">
+<table class="table">
+<tr>
+	<td><h5><b>Name:</b></h5></td>
+	<td><h5>{{name}}</h5></td>
+</tr>
+<tr>
+	<td><h5><b>Address:</b></h5></td>
+	<td><h5>{{address}}</h5></td>
+</tr>
+<tr>
+	<td><h5><b>Quantity:</b></h5></td>
+	<td><h5>{{quantity}}</h5></td>
+</tr>
+</table>
+</div>
+<div class="container">
+<a href ="{% url 'item' %}"><button class="btn btn-warning">Place another order</button></a>
+</div>
+{% endblock %}

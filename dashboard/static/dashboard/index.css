@@ -1,0 +1,42 @@
+body {
+    padding-left: 15px;
+    margin-left: -14px; 
+    margin-right: 1px;
+}
+a, a:visited, a:hover{
+    text-decoration: none;
+}
+.page-header {
+    background-color: #232f3e;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+.container {
+    display: flex;
+}
+.icon{
+    border: 2px solid black;
+}
+.column {
+    flex: 1;
+    font-size: 22px;
+    font-family: Lobster;
+    text-align: center;
+    /*for demo purposes only */
+    box-sizing: border-box;
+}
+.column-one {
+    order: 1;
+}
+.column-two {
+    order: 2;
+}
+.column-three {
+    order: 3;
+}
+.column-four {
+    order: 4;
+}
+.column-five {
+    order: 5;
+}

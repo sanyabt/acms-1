@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<html>
+<head>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<script>
+    function myFunction1()
+    {   post.selectPrime = 1;
+    }
+    function myFunction2()
+    {   post.selectStandard = 1;
+    }
+</script>
+<body>
+<div>
+    <h1>Database</h1>
+</div>
+<form action="" method="GET">
+             {% csrf_token %}
+<table style="width:100%">
+  <tr>
+    <th align="center">Locker Id</th>
+    <th align="center">Locker Name</th>
+    <th align="center">Prime</th>
+    <th align="center">Standard</th>
+      <th align="center">Select for Prime </th>
+      <th align="center">Select for Standard </th>
+  </tr>
+   {% for post in posts %}
+    <tr>
+       <td align="left"> {{ post.lockerId }}</td>
+      <td align="left">  {{ post.lockerName }}</td>
+     <td align="left"> {{ post.prime }}</td>
+      <td align="left"> {{ post.standard }}</td>
+      <a href = "{% url 'post_detail' pk= post.pk %}">  </a><!-- ADDED THIS URL -->
+        <td align="left"><input type="radio" name="selectPrime" value="yes"> </input> </td>
+         <td align="left"><input type="radio" name="selectStandard" value="yes"> </input>  </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+
+
+          <input type="submit" value="Submit" align="right" formaction=""/>
+</form>
+
+
+</body>
+</html>
+
+

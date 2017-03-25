@@ -1,0 +1,67 @@
+<!--HTML for Admin Dashboard. Gets results from querying function 'dashboard'-->
+
+{% extends 'home.html' %}
+{% block main_content %}
+<style type="text/css">
+form{ 
+	display: table;
+}
+p{
+	display: table-row;  
+}
+label, input{ 
+	display: table-cell; 
+}
+#id_user_date{
+	padding: 0px 10px;
+}
+</style>
+<script type="text/javascript">
+	window.onload=function (){
+		var x = document.getElementById("id_user_date");
+		x.setAttribute("type", "date");
+	}
+</script>
+<div class="container">
+	<h3><strong>Search lockers by:</strong></h3>
+</div>
+<div class="container">
+	<form method="post" action="{% url 'dashboard' %}">{% csrf_token %}
+		{%for field in form%}
+		<p>
+		       	<label>{{field.label_tag}}</label>
+		        {{field}}
+		</p>
+		{%endfor%}
+	<br>
+	<button type="submit" class="btn btn-warning">Find Lockers</button>
+	</form>
+</div>
+<br><br>
+
+<div class="container">
+<table class="table">
+	<tr>
+		<th><center>Locker Name</center></th>
+		<th><center>City</center></th>
+		<th><center>State</center></th>
+		<th><center>Pincode</center></th>
+		<th><center>Total Lockers</center></th>
+		<th><center>Prime Empty</center></th>
+		<th><center>Standard Empty</center></th>
+	</tr>
+
+	{% for i, j, k in ob %}
+		<tr>
+			<td><center>{{i.locker_name}}</center></td>
+			<td><center>{{i.city}}</center></td>
+			<td><center>{{i.state}}</center></td>
+			<td><center>{{i.pincode}}</center></td>
+			<td><center>100</center></td>
+			<td><center>{{j}}</center></td>
+			<td><center>{{k}}</center></td>
+		</tr>
+	{% endfor %}
+</table>
+</div>
+{% endblock %}

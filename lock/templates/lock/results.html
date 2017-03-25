@@ -1,0 +1,59 @@
+{% extends 'lock/base.html' %}
+{% load staticfiles%}
+{% load lock_extras %}
+{% block main_content %}
+<style type="text/css">
+input{
+    padding: 5px 2px;
+}
+</style>
+<div class="container">
+<form action="{% url 'results' %}"  method="get">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Order" class="btn btn-warning"/>
+</form>
+</div>
+<br>
+<div ><blockquote>
+        <p><i>You have searched for lockers present in the area: <b>{{query }}</b>, for <b>{{quantity}}</b> locker slot(s)</i></p>
+</blockquote></div>
+<div class="container">
+<form method="get">
+    <table class="table">
+    <thead>
+        <th class=" col-md-1">Locker Name</th>
+        <th class=" col-md-2">Address</th>
+        <td class=" col-md-1"> </td>
+        <td class=" col-md-1"> </td>
+        <td class=" col-md-1"> </td>
+    </thead>
+    {% for ob in mylist %}
+    <tr>	
+        {% for obj in ob %}
+            {%if forloop.first %}
+                <td class=" col-md-1">{{obj.locker__locker_name}}</td>
+                <td class=" col-md-2">{{obj.locker__city}}<br>{{obj.locker__state}}-{{obj.locker__pincode}}</td>
+                {% if obj.day2 < quantity|add:"0"  %}
+                    <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Prime:</b>{{obj.day2}}<span class="glyphicon glyphicon-remove"></span></td>
+                {% else %}
+                    <td class=" col-md-1"><input type="radio" name="chooseone" value="Prime"><label for="Prime"> Prime: </label> {{obj.day2}}</span></td>	
+   	        {% endif %}
+            {% else %}
+                {% if obj.day5 < quantity|add:"0"  %}
+                    <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Standard:</b> {{obj.day5}}<span class="glyphicon glyphicon-remove"></span></td>
+                    <td class=" col-md-1"><input type="submit" value="Select" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>
+                {% else %}
+                    <td class=" col-md-1"><input type="radio" name="chooseone"value="Standard"><label for="Standard"> Standard: </label> {{obj.day5}} </td></span>
+                    <td class=" col-md-1"><input type="submit" value="Select" class="btn btn-warning" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>	
+                {%endif%}
+        	{%endif%}
+        {% endfor%}
+    </tr>
+    {% empty %}
+        <h4 style="color:#069">No Lockers found. Please search for another place.</h4>	
+    {% endfor%}
+</table>
+</form>
+</div>
+{% endblock %}

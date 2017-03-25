@@ -1,0 +1,45 @@
+{% extends 'lock/base.html' %}
+{% load staticfiles%}
+{% load lock_extras %}
+{% block main_content %}
+<style>
+.inside{
+    display: inline-block;
+    border: 3px solid black;
+  }
+input{
+	padding: 5px 2px;
+}
+</style>
+<center>
+	<br><br>
+	<div class="inside"><img src="{%static 'img/item.jpg' %}" height="auto" width="200px"/></div>
+	<br><br>
+	<div>
+		<form action="{% url 'results' %}" method="get">
+    		{% csrf_token %}
+    		{{ form }}
+    		<input type="submit" value="Order" class="btn btn-warning" id="button"/>
+		</form>
+	</div>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

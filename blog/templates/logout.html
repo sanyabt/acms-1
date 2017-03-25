@@ -1,0 +1,31 @@
+{%load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<link rel="icon" href="{%static 'img/favicon.jpg' %}" type="image" sizes="16x16">
+	<title>Logout</title>
+	<link rel="stylesheet" type="text/css" href ="{% static 'blog/bootstrap-3.2.0/css/bootstrap.min.css'%}" />
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/bootstrap-3.2.0/css/bootstrap-theme.min.css' %}" />
+  	<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/index.css'%}" />
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/dashboard.css'%}" />
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/login.css'%}" />
+</head>
+<body>
+<div class="page-header">
+    <center><img id="logo" src="{%static 'img/amazon_logo1.png' %}" /></center>
+    <a href="{% url 'post_list' %}" class="home_button">
+        <span class="glyphicon glyphicon-home" data-toggle="tooltip" data-placement="bottom" title="Home"></span>
+    </a>
+</div>
+{% if error_message %}
+<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+<div id="outer">
+<div id="container">
+	<center><h3>LOGOUT SUCCESSFUL</h3></center>
+</div>
+</div>
+</body>
+</html>

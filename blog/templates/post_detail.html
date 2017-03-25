@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block postdetail %}
+<style type="text/css">
+    td,th{
+        font-size: 18px;
+    }
+</style>
+<br><br>
+<div class="outer">
+<table>
+    <tr>
+        <th width="70%">Locker Id:</th>
+        <td>{{ post.locker_id }}</td>
+    </tr>
+    <tr>
+        <th>Locker Name:</th>
+        <td>{{ post.locker_name }}</td>
+    </tr>
+    <tr>
+        <th>Locker City:</th>
+        <td>{{ post.city }}</td>
+    </tr>
+    <tr>
+        <th>Locker State:</th>
+        <td>{{ post.state }}</td>
+    </tr>
+    <tr>
+        <th>Locker Pincode:</th>
+        <td>{{ post.pincode }}</td>
+    </tr>
+    <tr>
+        <th>Prime Capacity:</th>
+        <td>{{ post.prime_capacity}}</td>
+    </tr>
+    <tr>
+        <th>Standard Capacity: </th>
+        <td>{{ post.standard_capacity }}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><a class="btn btn-warning" href="{% url 'post_edit' pk=post.pk %}">Update <span class="glyphicon glyphicon-pencil"></span></a></td>
+    </tr>
+    </table>
+</div>
+{%endblock%}

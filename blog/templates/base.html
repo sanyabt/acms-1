@@ -1,0 +1,92 @@
+{%load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" >
+	<link rel="icon" href="{%static 'img/favicon.jpg' %}" type="image" sizes="16x16">
+	<title>{%block title%}Onboarding Dashboard{%endblock%}</title>
+	<link rel="stylesheet" type="text/css" href ="{% static 'blog/bootstrap-3.2.0/css/bootstrap.min.css'%}" />
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/bootstrap-3.2.0/css/bootstrap-theme.min.css' %}" />
+  	<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/index.css'%}" />
+  	<link rel="stylesheet" type="text/css" href ="{% static 'blog/dashboard.css'%}" /> 	
+	<style type="text/css">
+		.outer{
+  			margin-left: 5%;
+  			margin-right: 5%;
+		}
+	</style>
+</head>
+<body>
+<div class="page-header">
+	{%if user.is_authenticated%}
+       	<a href = "{% url 'logout_view' %}" class="logout_button">
+           	<span class="glyphicon glyphicon-log-out" data-toggle="tooltip" data-placement="bottom" title="Logout"></span>
+   		</a>
+    {%endif%}
+    {%if not user.is_authenticated%}
+		<a href = "{% url 'register' %}" class="logout_button">
+			<span class="glyphicon glyphicon-check" data-toggle="tooltip" data-placement="bottom" title="Register"></span>
+		</a>
+    {%endif%}
+    <center><img id="logo" src="{%static 'img/amazon_logo1.png' %}" /></center>
+    <a href="{% url 'post_list' %}" class="home_button">
+        <span class="glyphicon glyphicon-home" data-toggle="tooltip" data-placement="bottom" title="Home"></span>
+    </a>
+    {%if user.is_authenticated%}
+    	<a href="{% url 'post_new'%}" class="new_locker_button"><span class="glyphicon glyphicon-plus" data-toggle="tooltip" data-placement="bottom" title="Add Locker"></span></a>
+    {% endif %}
+</div>
+
+<div class="outer">
+	{%if user.is_authenticated%}
+	<table>
+		<form role="search" method="GET" action="{% url 'searchResults' %}">
+			<tr>
+				<td><input type="text" class="form-control" name="q" placeholder="Search for Lockers" value="{{request.GET.q}}"/></td>
+				<td></td>
+				<td><button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search" data-toggle="tooltip" data-placement="bottom" title="Search"></span></button></td>
+			</tr>
+		</form>
+	</table>
+	{%endif%}
+</div>
+
+	{%if not user.is_authenticated%}
+	<br><br><br><br><br><br>
+		<div class="container">
+	        <div class="column column-one">
+	             <a href="{% url 'item' %}"><img class="icon" src="{%static 'img/order.png' %}" />Order</a>
+	        </div>
+	        
+	        <div class="column column-two"></div>
+	        
+	        <div class="column column-three">
+	            <a href="{% url 'login_operational_user' %}"><img class="icon" src="{%static 'img/search.png' %}" />Search Lockers</a>
+	        </div>
+	        
+	        <div class="column column-four"></div>
+	        
+	        <div class="column column-five">
+	            <a href="{% url 'login_user' %}"><img class="icon" src="{%static 'img/admin.ico' %}" />Admin Panel</a>
+	        </div>
+	    </div>
+	{%endif%}
+
+	{% block login %}
+	{%endblock%}
+	{% block part %}
+	{%endblock%}
+	{% block content %}
+	{%endblock%}
+	{% block edit %}
+	{%endblock%}
+</div>
+{% block postdetail %}
+{% endblock %}
+{% if user.is_authenticated %}
+{%block postlist%}  
+{%endblock%}
+{%endif%}
+</body>
+</html>

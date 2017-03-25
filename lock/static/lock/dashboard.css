@@ -1,0 +1,18 @@
+.home_button, .home_button:hover, .home_button:visited{
+    color: #ffffff; 
+    float: left; 
+    font-size: 26pt; 
+    margin-top: -30px;
+}
+.new_locker_button,.new_locker_button:hover, .new_locker_button:visited{
+    color: #ffffff; 
+    float: right; 
+    font-size: 26pt; 
+    margin-top: -30px; 
+    margin-left: -10px;
+}
+.logout_button, .logout_button:hover, .logout_button:visited{
+	color: #ffffff; 
+    float: right; 
+    font-size: 26pt;  
+}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%block title%} Add new {%endblock%}
+{% block content %}
+<script type="text/javascript">
+	window.onload = function() {
+  		var x=document.getElementById("id_Prime_percentage");
+  		x.style.display="none";
+  		labels = document.getElementsByTagName('label');
+   		for( var i = 0; i < labels.length; i++ )
+      		if (labels[i].htmlFor == "id_Prime_percentage")
+           		labels[i].style.display="none";
+};
+</script>
+    <h3 class="outer">Add a new locker</h3>
+	<form method="post" class="form-horizontal" action="" enctype="multipart/form-data">{% csrf_token %}
+	    {%include 'form-template.html'%}
+	    <div class="form-group">
+	        <div class="col-sm-offset-2-col-sm-3">
+	            <span class="text-danger small"></span>
+	        </div>
+	        <label class="control-label col-sm-2"></label>
+	        <div class="col-sm-2"><button type="submit" class="btn btn-warning">Add Locker</button></div><!--actual input area-->
+	    </div>
+    </form>
+{% endblock %}
