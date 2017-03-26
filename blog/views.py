@@ -183,22 +183,6 @@ def login_operational_user(request):
     return render(request, 'loginoperational.html')
 
 
-def login_new_user(request):
-    if request.method == "POST":
-        mail = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=mail, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                return HttpResponse("OUserview")
-            else:
-                return render(request, 'login_new_user.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'login_new_user.html', {'error_message': 'Invalid login'})
-    return render(request, 'login_new_user.html')
-
-
 def logout_view(request):
     logout(request)
     return render(request, 'logout.html')
