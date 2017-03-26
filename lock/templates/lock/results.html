@@ -42,7 +42,7 @@ input{
             {% else %}
                 {% if obj.day5 < quantity|add:"0"  %}
                     <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Standard:</b> {{obj.day5}}<span class="glyphicon glyphicon-remove"></span></td>
-                    <td class=" col-md-1"><input type="submit" value="Select" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>
+                    <td class=" col-md-1"><input type="submit" class="btn btn-warning" value="Select" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>
                 {% else %}
                     <td class=" col-md-1"><input type="radio" name="chooseone"value="Standard"><label for="Standard"> Standard: </label> {{obj.day5}} </td></span>
                     <td class=" col-md-1"><input type="submit" value="Select" class="btn btn-warning" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>	
