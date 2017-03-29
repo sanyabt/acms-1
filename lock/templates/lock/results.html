@@ -28,32 +28,45 @@ input{
         <td class=" col-md-1"> </td>
         <td class=" col-md-1"> </td>
     </thead>
-    {% for ob in mylist %}
+    {% for ob1, ob2 in mylist %}
     <tr>	
-        {% for obj in ob %}
-            {%if forloop.first %}
-                <td class=" col-md-1">{{obj.locker__locker_name}}</td>
-                <td class=" col-md-2">{{obj.locker__city}}<br>{{obj.locker__state}}-{{obj.locker__pincode}}</td>
-                {% if obj.day2 < quantity|add:"0"  %}
-                    <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Prime:</b>{{obj.day2}}<span class="glyphicon glyphicon-remove"></span></td>
-                {% else %}
-                    <td class=" col-md-1"><input type="radio" name="chooseone" value="Prime"><label for="Prime"> Prime: </label> {{obj.day2}}</span></td>	
-   	        {% endif %}
-            {% else %}
-                {% if obj.day5 < quantity|add:"0"  %}
-                    <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Standard:</b> {{obj.day5}}<span class="glyphicon glyphicon-remove"></span></td>
-                    <td class=" col-md-1"><input type="submit" class="btn btn-warning" value="Select" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>
-                {% else %}
-                    <td class=" col-md-1"><input type="radio" name="chooseone"value="Standard"><label for="Standard"> Standard: </label> {{obj.day5}} </td></span>
-                    <td class=" col-md-1"><input type="submit" value="Select" class="btn btn-warning" formaction="{% url 'success' quantity obj.locker__locker_id %}" /></td>	
-                {%endif%}
-        	{%endif%}
-        {% endfor%}
+        <td class=" col-md-1">{{ob1.locker__locker_name}}</td>
+        <td class=" col-md-2">{{ob1.locker__city}}<br>{{ob1.locker__state}}-{{ob1.locker__pincode}}</td>
+        {% if ob1.day2 < quantity|add:"0"  %}
+            <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Prime:</b>{{ob1.day2}}<span class="glyphicon glyphicon-remove"></span></td>
+        {% else %}
+            <td class=" col-md-1"><input type="radio" name="chooseone" value="Prime" onclick="func({{ob1.locker__locker_id}})" ><label for="Prime"> Prime: </label> {{ob1.day2}}</span></td>	
+        {% endif %}
+        {% if ob2.day5 < quantity|add:"0"  %}
+            <td class=" col-md-1" style="background-color:#DEDEDE;"><b>Standard:</b> {{ob2.day5}}<span class="glyphicon glyphicon-remove"></span></td>
+            <td class=" col-md-1"><input type="submit" class="btn btn-warning" id="{{ob1.locker__locker_id}}" name="submit" value="Select" formaction="{% url 'success' quantity ob1.locker__locker_id %}" disabled/></td>
+        {% else %}
+            <td class=" col-md-1"><input type="radio" name="chooseone"value="Standard" onclick="func({{ob1.locker__locker_id}})" ><label for="Standard"> Standard: </label> {{ob2.day5}} </td></span>
+            <td class=" col-md-1"><input type="submit" value="Select" id="{{ob1.locker__locker_id}}" name="submit" class="btn btn-warning" formaction="{% url 'success' quantity ob1.locker__locker_id %}" disabled/></td>	
+        {%endif%}
     </tr>
+    
     {% empty %}
         <h4 style="color:#069">No Lockers found. Please search for another place.</h4>	
     {% endfor%}
 </table>
 </form>
 </div>
+<script>
+btn=""
+function func(num){
+//var fl = document.getElementById(num);
+
+/*var btnlist = document.getElementsByName("submit");
+for(i=0;i<btnlist.length;i++){
+	btnlist[i].disabled=true;
+
+}*/
+if(btn){
+btn.disabled=true;
+}
+btn= document.getElementById(num);
+btn.disabled=false;
+}   
+</script>
 {% endblock %}
