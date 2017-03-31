@@ -76,7 +76,8 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+"""
+#Uncomment for local computer
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -91,10 +92,25 @@ DATABASES = {
     }
 }
 
-"""
+
 CRONJOBS = [
     ('0 0 * * *', 'dashboard.views.rotate_day')
 ]"""
+
+#Uncomment for pythonanywhere
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'utkarsha19$amazon',
+        'USER': 'utkarsha19',
+        'PASSWORD': 'nathulal',
+        'HOST': 'utkarsha19.mysql.pythonanywhere-services.com',
+        'PORT': 3306,
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
