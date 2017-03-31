@@ -91,7 +91,7 @@ def dashboard(request):
 			ob = zip(obj, obj2, obj3)
 			context = {
 			"ob":ob,
-			"len":len(ob)
+			"len":len(obj)
 			}
 			return render(request, 'dashboard.html', context)
 

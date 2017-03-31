@@ -95,7 +95,8 @@ DATABASES = {
 
 CRONJOBS = [
     ('0 0 * * *', 'dashboard.views.rotate_day')
-]"""
+]
+"""
 
 #Uncomment for pythonanywhere
 DATABASES = {
