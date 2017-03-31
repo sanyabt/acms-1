@@ -88,8 +88,13 @@ def dashboard(request):
 				var = 4
 			elif use_date==date_5:
 				var = 5
+			elif use_date < date_now:
+				var = -1
 
 			for ob in obj:
+				if var==-1:
+					obj=''
+					break
 				for row in ob.prime_set.all():
 					if (var==3) | (var==4) | (var==5) | (var==6):
 						obj2.append(ob.prime_capacity)
