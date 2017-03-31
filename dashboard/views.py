@@ -4,7 +4,7 @@ from django.db.models import Q
 from datetime import date
 from datetime import timedelta
 from .forms import NewForm
-from .script import fun
+#from .script import fun
 from django.http import HttpResponse
 # Create your views here.
 
@@ -28,11 +28,22 @@ def dashboard(request):
 			date_4 = date_now + timedelta(days=4)
 			date_5 = date_now + timedelta(days=5)
 
-			obj = Table1.objects.filter(
+			d={}
+			if q1 != "":
+				d['locker_name__iexact']=q1;
+			if q2 != "":
+				d['city__iexact']=q2;
+			if q3 != "":
+				d['state__iexact']=q3;
+			if q4 != "":
+				d['pincode__iexact']=q4;
+
+			obj = Table1.objects.filter(**d).distinct()
+			"""obj = Table1.objects.filter(
 			Q(locker_name__iexact=q1)|
 			Q(city__iexact=q2)|
 			Q(state__iexact=q3)|
-			Q(pincode__iexact=q4)).distinct()
+			Q(pincode__iexact=q4)).distinct()"""
 			obj2 = list()
 			obj3 = list()
 			var = 0
@@ -80,6 +91,7 @@ def dashboard(request):
 			ob = zip(obj, obj2, obj3)
 			context = {
 			"ob":ob,
+			"len":len(ob)
 			}
 			return render(request, 'dashboard.html', context)
 

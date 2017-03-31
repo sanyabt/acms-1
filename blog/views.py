@@ -198,6 +198,12 @@ def register(request):
         user.set_password(password)
         user.save()
         user = authenticate(username=username, password=password, email=email)
+        if user is not None: 
+            if user.is_active:
+                #login(request, user)
+                q=1
+                return render(request,'post_list.html', {'q': q})
+        return render(request,'post_list.html', {'q': q})
     context ={
         "form": form,
     }

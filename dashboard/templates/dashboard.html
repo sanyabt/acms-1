@@ -40,28 +40,31 @@ label, input{
 <br><br>
 
 <div class="container">
-<table class="table">
-	<tr>
-		<th><center>Locker Name</center></th>
-		<th><center>City</center></th>
-		<th><center>State</center></th>
-		<th><center>Pincode</center></th>
-		<th><center>Total Lockers</center></th>
-		<th><center>Prime Available</center></th>
-		<th><center>Standard Available</center></th>
-	</tr>
-
-	{% for i, j, k in ob %}
+{% ifequal len 0 %}
+	<p>No lockers available for entered query. Please search again!</p>
+{%else %}
+	<table class="table">
 		<tr>
-			<td><center>{{i.locker_name}}</center></td>
-			<td><center>{{i.city}}</center></td>
-			<td><center>{{i.state}}</center></td>
-			<td><center>{{i.pincode}}</center></td>
-			<td><center>100</center></td>
-			<td><center>{{j}}</center></td>
-			<td><center>{{k}}</center></td>
+			<th><center>Locker Name</center></th>
+			<th><center>City</center></th>
+			<th><center>State</center></th>
+			<th><center>Pincode</center></th>
+			<th><center>Total Lockers</center></th>
+			<th><center>Prime Available</center></th>
+			<th><center>Standard Available</center></th>
 		</tr>
-	{% endfor %}
-</table>
+		{% for i, j, k in ob %}
+			<tr>
+				<td><center>{{i.locker_name}}</center></td>
+				<td><center>{{i.city}}</center></td>
+				<td><center>{{i.state}}</center></td>
+				<td><center>{{i.pincode}}</center></td>
+				<td><center>100</center></td>
+				<td><center>{{j}}</center></td>
+				<td><center>{{k}}</center></td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endifequal %}
 </div>
 {% endblock %}
