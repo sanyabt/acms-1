@@ -4,7 +4,7 @@ from django.db.models import Q
 from datetime import date
 from datetime import timedelta
 from .forms import NewForm, ChartForm
-from .script import fun
+#from .script import fun
 from django.http import HttpResponse
 from graphos.sources.simple import SimpleDataSource
 from graphos.renderers.gchart import LineChart

@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
+"""
 #Uncomment for local computer
 DATABASES = {
     'default': {
@@ -97,8 +97,8 @@ DATABASES = {
 CRONJOBS = [
     ('0 0 * * *', 'dashboard.views.rotate_day')
 ]
-
 """
+
 #Uncomment for pythonanywhere
 DATABASES = {
     'default': {
@@ -113,7 +113,7 @@ DATABASES = {
         },
     }
 }
-"""
+
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
