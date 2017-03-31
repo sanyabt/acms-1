@@ -12,7 +12,6 @@ class Table1(models.Model):
     standard_capacity = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'table1'
 
 
@@ -24,7 +23,6 @@ class Prime(models.Model):
     day2 = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'prime'
 
 
@@ -39,8 +37,14 @@ class Standard(models.Model):
     day5 = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'standard'
 
+class Orders(models.Model):
+    serial_no = models.AutoField(primary_key=True)
+    locker = models.ForeignKey('Table1', on_delete=models.CASCADE)
+    order_date = models.DateField()
+    order_type = models.IntegerField()
+    locker_used = models.IntegerField()
 
-
+    class Meta:
+        db_table = 'orders'

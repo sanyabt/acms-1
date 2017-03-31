@@ -3,10 +3,42 @@ from .models import *
 from django.db.models import Q
 from datetime import date
 from datetime import timedelta
-from .forms import NewForm
-#from .script import fun
+from .forms import NewForm, ChartForm
+from .script import fun
 from django.http import HttpResponse
-# Create your views here.
+from graphos.sources.simple import SimpleDataSource
+from graphos.renderers.gchart import LineChart
+from graphos.renderers import gchart
+from graphos.sources.model import ModelDataSource
+
+def formcharts(request):
+	form_class = ChartForm()
+	return render(request, 'chartForm.html', {'form':form_class})
+
+def charts(request):
+	form_class = ChartForm()
+	lockerId = request.POST.get('locker_id')
+	lockerType = request.POST.get('prime_or_standard')
+	if lockerType.lower() == "prime":
+		locker_type="Prime"
+		locker = Orders.objects.filter(
+	    	Q(locker_id=lockerId),Q(order_type=1)
+	    ).distinct()
+	else:
+		locker_type="Standard"
+		locker = Orders.objects.filter(
+	    	Q(locker_id=lockerId),Q(order_type=2)
+	    ).distinct()
+
+	data_source = ModelDataSource(locker,fields=['order_date', 'locker_used'])
+	chart = gchart.LineChart(data_source, html_id='gchart_div', options={'title': 'Locker Booking Trends'})
+	context = {
+		'chart': chart,
+		'len':len(locker),
+		'locker_id':lockerId,
+		'type':locker_type
+		}
+	return render(request, 'charts.html', context)
 
 def dashboard(request):
 	form_class = NewForm
@@ -39,11 +71,6 @@ def dashboard(request):
 				d['pincode__iexact']=q4;
 
 			obj = Table1.objects.filter(**d).distinct()
-			"""obj = Table1.objects.filter(
-			Q(locker_name__iexact=q1)|
-			Q(city__iexact=q2)|
-			Q(state__iexact=q3)|
-			Q(pincode__iexact=q4)).distinct()"""
 			obj2 = list()
 			obj3 = list()
 			var = 0
@@ -94,8 +121,7 @@ def dashboard(request):
 			"len":len(obj)
 			}
 			return render(request, 'dashboard.html', context)
-
-	return render(request, 'dashboard.html', {'form':form_class,})
+	return render(request, 'dashboard.html', {'form':form_class})
 
 def rotate_day():
     fun()

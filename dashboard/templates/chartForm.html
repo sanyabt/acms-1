@@ -1,0 +1,31 @@
+<!--HTML for Admin Dashboard. Gets results from querying function 'dashboard'-->
+
+{% extends 'home.html' %}
+{% block main_content %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+</script>
+<div class="container">
+	<h2>Generate Report</h2>
+</div>
+<div class="container">
+	<h4>Enter lockerID and Prime/Standard for locker whose report has to be generated</h4>
+</div>
+<div class="container">
+<table>
+	<form method="post" action="{% url 'charts' %}">{% csrf_token %}
+		{%for field in form%}
+		<tr>
+		       	<td><label><br>{{field.label_tag}}</label></td>
+		        <td>{{field}}</td>
+		</tr>
+		{%endfor%}
+		<tr>
+			<td></td>
+			<td><br><button type="submit" class="btn btn-warning">Generate Report</button></td>
+		</tr>
+	</form>
+</table>
+</div>
+{% endblock %}

@@ -8,3 +8,7 @@ class NewForm(ModelForm):
 	class Meta:
 		model = Table1
 		fields = ['locker_name', 'city', 'state', 'pincode']
+
+class ChartForm(forms.Form):
+	locker_id = forms.IntegerField(required=True, label='Locker ID')
+	prime_or_standard = forms.CharField(required=True, label='Prime/Standard')

@@ -1,0 +1,31 @@
+<!--HTML for Admin Dashboard. Gets results from querying function 'dashboard'-->
+
+{% extends 'home.html' %}
+{% block main_content %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    window.onload = function(){
+    	document.getElementById("gchart_div").style.width="100%";
+    }
+</script>
+{% ifequal len 0 %}
+	<div class="container">
+		<p>No data/lockers available for given lockerID. Please enter again!</p>
+	</div>
+{%else %}
+	<div class="container">
+		<h3>Report for {{type}} lockers of lockerID:{{locker_id}}</h3>
+	</div>
+	<div class="container">
+		{{chart.as_html}}
+	</div>
+{% endifequal %}
+<br>
+<div class="container">
+	<form style="width:100%" method="post" action="{% url 'formcharts' %}">{% csrf_token %}
+		<center><button type="submit" class="btn btn-warning">Generate Another Report</button></center>
+	</form>
+</div>
+<br><br>
+{% endblock %}
